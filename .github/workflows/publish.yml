@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node_version: [ '12.11.0', '12.17.0', '12.19.0' ]
+        node_version: [ '12.17.0', '12.19.0' ]
         os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Checkout Repo
