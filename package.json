@@ -7,8 +7,9 @@
     "clean": "sh tools/clean-python.sh && make -C ./pybind11/ clean",
     "predeps": "tools/check-dependence.js",
     "deps": "make -C ./pybind11/ && tools/install-python.js",
-    "preinstall": "npm run deps",
-    "postinstall": "npm run build",
+    "preinstall": "npm install @mapbox/node-pre-gyp",
+    "install": "node-pre-gyp install --fallback-to-build",
+    "postinstall": "node ./tools/recovery-lib.js",
     "pretest": "npm run lint && bip install numpy==1.17.4",
     "test": "ava",
     "cov": "nyc --reporter=text-summary npm run test",
@@ -16,7 +17,8 @@
     "lint": "npm run lint:js && npm run lint:clang",
     "lint:js": "eslint . -c .eslintrc.js --no-eslintrc",
     "lint:clang": "./clang-format.py",
-    "build": "npm run compile",
+    "build": "npm run deps && npm run compile",
+    "pre-gyp": "cp -r .miniconda/lib ./build/Release/ && node-pre-gyp package",
     "codecov": "nyc report --reporter=lcovonly && codecov",
     "htmlcov": "nyc report --reporter=html",
     "compile": "node-gyp configure && node-gyp build"
@@ -49,13 +51,12 @@
     ]
   },
   "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.3",
-    "aws-sdk": "^2.881.0",
     "bindings": "^1.5.0",
     "debug": "^4.1.1",
     "node-addon-api": "^3.0.0"
   },
   "devDependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.3",
     "ava": "^3.13.0",
     "codecov": "^3.6.5",
     "eslint": "^7.15.0",
@@ -71,8 +72,7 @@
     "module_path": "./build/Release/",
     "host": "https://boa-binary.oss-cn-hangzhou.aliyuncs.com",
     "bucket": "boa-binary",
-    "region": "oss-cn-hangzhou.aliyuncs",
-    "s3ForcePathStyle": true
+    "region": "oss-cn-hangzhou"
   },
   "gitHead": "53e131a069b3112a74ae5d99aa1ab08bec768c7e"
 }

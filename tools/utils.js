@@ -267,4 +267,21 @@ module.exports = {
     cmds.push('--timeout=5');
     return this.py(...cmds);
   },
+  /**
+   * recovery python library directory from node-pre-gyp
+   */
+  recoveryLib() {
+    const src = path.join(__dirname, '../build/Release/lib');
+    const dest = path.join(__dirname, `../${CONDA_INSTALL_NAME}/lib`);
+    const condaDir = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
+    if (!fs.existsSync(condaDir)) {
+      fs.mkdirSync(condaDir);
+    }
+    if (fs.existsSync(src) && !fs.existsSync(dest)) {
+      fs.renameSync(src, dest);
+    }
+    if (!fs.existsSync(CONDA_INSTALL_DIR)) {
+      fs.writeFileSync(CONDA_INSTALL_DIR, condaDir);
+    }
+  }
 };
