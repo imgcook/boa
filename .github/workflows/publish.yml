@@ -32,6 +32,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: Install Dependencies
         run: |
+          npm run deps
           npm install --build-from-source
           npm run build
           npx node-pre-gyp package 
