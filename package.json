@@ -1,6 +1,6 @@
 {
   "name": "@pipcook/boa",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "Use Python modules seamlessly in Node.js",
   "main": "lib/index.js",
   "scripts": {
@@ -49,6 +49,8 @@
     ]
   },
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.3",
+    "aws-sdk": "^2.881.0",
     "bindings": "^1.5.0",
     "debug": "^4.1.1",
     "node-addon-api": "^3.0.0"
@@ -63,6 +65,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "binary": {
+    "module_name": "boa",
+    "module_path": "./build/Release/",
+    "host": "https://boa-binary.oss-cn-hangzhou.aliyuncs.com",
+    "bucket": "boa-binary",
+    "region": "oss-cn-hangzhou.aliyuncs",
+    "s3ForcePathStyle": true
   },
   "gitHead": "53e131a069b3112a74ae5d99aa1ab08bec768c7e"
 }
