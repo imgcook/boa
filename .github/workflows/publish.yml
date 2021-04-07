@@ -47,6 +47,4 @@ jobs:
         with:
           name: dist-without-markdown
           path: |
-            build
-            .miniconda/lib
-            !.miniconda/lib/**/*.a
+            build/stage/*.tar.gz
