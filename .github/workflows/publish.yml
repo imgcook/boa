@@ -35,7 +35,7 @@ jobs:
           npm run deps
           npm install --build-from-source
           npm run build
-          npx node-pre-gyp package 
+          npm run pre-gyp
       # - name: Publish to npm
       # - run: |
       #     echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ~/.npmrc
