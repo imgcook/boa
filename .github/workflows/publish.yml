@@ -45,6 +45,6 @@ jobs:
       - name: boa binary artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist-without-markdown
+          name: dist-tarball
           path: |
             build/stage/*.tar.gz
