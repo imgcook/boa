@@ -45,6 +45,6 @@ jobs:
       - name: boa binary artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist-tarball
+          name: dist-tarball-${{ matrix.node_version }}-${{ matrix.os }}
           path: |
             build/stage/*.tar.gz
