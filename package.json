@@ -18,7 +18,7 @@
     "lint:js": "eslint . -c .eslintrc.js --no-eslintrc",
     "lint:clang": "./clang-format.py",
     "build": "npm run deps && npm run compile",
-    "pre-gyp": "cp -r .miniconda/lib ./build/Release/ && node-pre-gyp package",
+    "pre-gyp": "node ./tools/pre-gyp.js && node-pre-gyp package",
     "codecov": "nyc report --reporter=lcovonly && codecov",
     "htmlcov": "nyc report --reporter=html",
     "compile": "node-gyp configure && node-gyp build"
