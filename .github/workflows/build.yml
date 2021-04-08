@@ -1,0 +1,61 @@
+name: build
+on:
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - '*.md'
+  pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
+    branches:
+    - main
+    paths-ignore:
+    - '*.md'
+
+jobs:
+  universal:
+    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    if: ${{ github.event_name == 'push' || github.event.pull_request.draft == false }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        node_version: ['12', '14']
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+    - name: Cancel previous runs
+      uses: imgcook/cancel-workflow-action@81524cf38ed0e3a5865a550dde6118d26b7a5ede
+      with:
+        access_token: ${{ github.token }}
+        exception: main
+    - uses: actions/checkout@v2
+    - name: Restore node_modules
+      uses: actions/cache@v2
+      with:
+        path: |
+          node_modules
+        key: ${{ runner.os }}-${{ matrix.node_version }}-npmpkg-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npmpkg-${{ matrix.node_version }}
+          ${{ runner.os }}-npmpkg
+    - name: Restore miniconda
+      uses: actions/cache@v2
+      with:
+        path: |
+          .miniconda
+          Miniconda3-*.sh
+          .CONDA_INSTALL_DIR
+        key: ${{ runner.os }}-miniconda-${{ hashFiles('Miniconda3-*.sh') }}
+        restore-keys: |
+          ${{ runner.os }}-miniconda
+    - name: Using Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node_version }}
+    - name: Building BOA
+      run: |
+        npm install
+        npm run build
+    - name: Running unit tests
+      run: |
+        npm run test
