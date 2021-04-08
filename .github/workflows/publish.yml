@@ -7,10 +7,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-      types: [ opened, synchronize, reopened, ready_for_review ]
-      branches:
-      - master
 
 jobs:
   release:
@@ -35,12 +31,12 @@ jobs:
           npm install
           npm run build
           npm run pre-gyp
-      # - name: Publish to npm
-      # - run: |
-      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ~/.npmrc
-      #     git config --global user.name 'WenheLI'
-      #     git config --global user.email 'lwh.eric@alibaba-inc.com'
-      #     npm run release
+      - name: Publish to npm
+      - run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ~/.npmrc
+          git config --global user.name 'WenheLI'
+          git config --global user.email 'lwh.eric@alibaba-inc.com'
+          npm run release
       - name: boa binary artifacts
         uses: actions/upload-artifact@v2
         with:
