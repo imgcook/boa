@@ -1,6 +1,5 @@
 const test = require('ava');
 /* eslint-disable no-process-exit */
-'use strict';
 
 const path = require('path');
 const { spawn } = require('child_process');
