@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node_version: [ '12.17.0', '12.19.0' ]
+        node_version: [ '12.17.0' ]
         os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Checkout Repo
@@ -32,8 +32,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: Install Dependencies
         run: |
-          npm run deps
-          npm install --build-from-source
+          npm install
           npm run build
           npm run pre-gyp
       # - name: Publish to npm

@@ -8,7 +8,7 @@
     "predeps": "tools/check-dependence.js",
     "deps": "make -C ./pybind11/ && tools/install-python.js",
     "preinstall": "npm install @mapbox/node-pre-gyp",
-    "install": "node-pre-gyp install --fallback-to-build",
+    "install": "node-pre-gyp install --fallback-to-build=false || npm run build",
     "postinstall": "node ./tools/recovery-lib.js",
     "pretest": "npm run lint && bip install numpy==1.17.4",
     "test": "ava",
