@@ -1,5 +1,5 @@
-import * as boa from '../../';
 import test from 'ava';
+import * as boa from '../../';
 
 test('test typescript kwargs', (t) => {
   const string = boa.import('string');
