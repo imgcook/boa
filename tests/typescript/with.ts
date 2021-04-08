@@ -1,5 +1,5 @@
-import * as boa from '../../';
 import test from 'ava';
+import * as boa from '../../';
 
 test.cb('test typescript with-statement', (t) => {
   t.plan(1);
@@ -12,4 +12,3 @@ test.cb('test typescript with-statement', (t) => {
     t.end();
   });
 });
-

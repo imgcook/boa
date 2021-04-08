@@ -1,10 +1,9 @@
+const test = require('ava');
 /* eslint-disable no-process-exit */
-
 'use strict';
 
 const path = require('path');
-const test = require('ava');
-const { spawnSync } = require('child_process');
+const { spawn } = require('child_process');
 
 function getAbsolutePath(relativePath) {
   return path.join(__dirname, relativePath);
@@ -34,10 +33,12 @@ function check(t, appPath) {
   // 
   // The nyc 14 conflicts with the node `--experimental-loader` design,
   // which currently uses nyc 15 and tap 14 in combination with a skip error.
-  const result = spawnSync(process.execPath, args, options);
-  t.is(result.signal, null);
-  t.is(result.status, 0);
-  t.end();
+  const child = spawn(process.execPath, args, options);
+  child.on('close', (code, signal) => {
+    t.is(signal, null);
+    t.is(code, 0);
+    t.end();
+  });
 }
 
 test.cb('python stdlib', t => check(t, './py/test-esm-loader-stdlib.mjs'));

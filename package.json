@@ -9,7 +9,7 @@
     "deps": "make -C ./pybind11/ && tools/install-python.js",
     "preinstall": "npm run deps",
     "postinstall": "npm run build",
-    "pretest": "npm run lint && bip install numpy==1.17.4",
+    "pretest": "npm run lint && ./.miniconda/bin/pip install numpy==1.17.4",
     "test": "ava",
     "cov": "nyc --reporter=text-summary npm run test",
     "cov:report": "nyc report -r=lcov",
@@ -20,9 +20,6 @@
     "codecov": "nyc report --reporter=lcovonly && codecov",
     "htmlcov": "nyc report --reporter=html",
     "compile": "node-gyp configure && node-gyp build"
-  },
-  "bin": {
-    "bip": "./tools/bip.js"
   },
   "repository": {
     "type": "git",
@@ -54,6 +51,7 @@
     "node-addon-api": "^3.0.0"
   },
   "devDependencies": {
+    "@types/node": "^14.14.37",
     "ava": "^3.13.0",
     "codecov": "^3.6.5",
     "eslint": "^7.15.0",
@@ -63,6 +61,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "53e131a069b3112a74ae5d99aa1ab08bec768c7e"
+  }
 }
