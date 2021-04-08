@@ -1,13 +1,14 @@
 'use strict';
 
 const os = require('os');
-const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const fs = require('fs-extra');
 
 // Constants
 const CONDA_INSTALL_DIR = path.join(__dirname, '../.CONDA_INSTALL_DIR');
 const CONDA_INSTALL_NAME = '.miniconda';
+const CONDA_DIRS = [ 'lib', 'bin', 'include' ];
 
 // Environment variables
 let {
@@ -271,17 +272,34 @@ module.exports = {
    * recovery python library directory from node-pre-gyp
    */
   recoveryLib() {
-    const src = path.join(__dirname, '../build/Release/lib');
-    const dest = path.join(__dirname, `../${CONDA_INSTALL_NAME}/lib`);
-    const condaDir = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
-    if (!fs.existsSync(condaDir)) {
-      fs.mkdirSync(condaDir);
+    const src = path.join(__dirname, '../build/Release');
+    const dest = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest);
     }
-    if (fs.existsSync(src) && !fs.existsSync(dest)) {
-      fs.renameSync(src, dest);
-    }
+    CONDA_DIRS.forEach(dir => {
+      const s = path.join(src, dir);
+      const d = path.join(dest, dir);
+      if (fs.existsSync(s) && !fs.existsSync(d)) {
+        fs.renameSync(s, d);
+      }
+    });
     if (!fs.existsSync(CONDA_INSTALL_DIR)) {
-      fs.writeFileSync(CONDA_INSTALL_DIR, condaDir);
+      fs.writeFileSync(CONDA_INSTALL_DIR, dest);
     }
+  },
+  /**
+   * copy files into pre build directory
+   */
+  copyPreBuildLib() {
+    const dest = path.join(__dirname, '../build/Release');
+    const src = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
+    CONDA_DIRS.forEach(dir => {
+      const s = path.join(src, dir);
+      const d = path.join(dest, dir);
+      if (fs.existsSync(s) && !fs.existsSync(d)) {
+        fs.copy(s, d);
+      }
+    });
   }
 };
