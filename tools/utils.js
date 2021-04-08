@@ -3,7 +3,7 @@
 const os = require('os');
 const path = require('path');
 const { execSync } = require('child_process');
-const fs = require('fs-extra');
+const fs = require('fs');
 
 // Constants
 const CONDA_INSTALL_DIR = path.join(__dirname, '../.CONDA_INSTALL_DIR');
@@ -292,13 +292,14 @@ module.exports = {
    * copy files into pre build directory
    */
   copyPreBuildLib() {
+    const fse = require('fs-extra');
     const dest = path.join(__dirname, '../build/Release');
     const src = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
     CONDA_DIRS.forEach(dir => {
       const s = path.join(src, dir);
       const d = path.join(dest, dir);
-      if (fs.existsSync(s) && !fs.existsSync(d)) {
-        fs.copy(s, d);
+      if (fse.existsSync(s) && !fse.existsSync(d)) {
+        fse.copy(s, d);
       }
     });
   }
