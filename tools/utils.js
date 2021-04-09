@@ -185,7 +185,7 @@ module.exports = {
   getPythonLibraryRunPath() {
     if (BOA_CONDA_PREFIX === '@package') {
       const prefix = this.PLATFORM === 'darwin' ? '@loader_path' : '$$ORIGIN';
-      return `${prefix}/../../${CONDA_INSTALL_NAME}/lib`;
+      return `${prefix}/lib`;
     } else {
       return this.getPythonLibraryAbsPath();
     }
@@ -267,40 +267,5 @@ module.exports = {
     }
     cmds.push('--timeout=5');
     return this.py(...cmds);
-  },
-  /**
-   * recovery python library directory from node-pre-gyp
-   */
-  recoveryLib() {
-    const src = path.join(__dirname, '../build/Release');
-    const dest = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
-    if (!fs.existsSync(dest)) {
-      fs.mkdirSync(dest);
-    }
-    CONDA_DIRS.forEach(dir => {
-      const s = path.join(src, dir);
-      const d = path.join(dest, dir);
-      if (fs.existsSync(s) && !fs.existsSync(d)) {
-        fs.renameSync(s, d);
-      }
-    });
-    if (!fs.existsSync(CONDA_INSTALL_DIR)) {
-      fs.writeFileSync(CONDA_INSTALL_DIR, dest);
-    }
-  },
-  /**
-   * copy files into pre build directory
-   */
-  copyPreBuildLib() {
-    const fse = require('fs-extra');
-    const dest = path.join(__dirname, '../build/Release');
-    const src = path.join(__dirname, `../${CONDA_INSTALL_NAME}`);
-    CONDA_DIRS.forEach(dir => {
-      const s = path.join(src, dir);
-      const d = path.join(dest, dir);
-      if (fse.existsSync(s) && !fse.existsSync(d)) {
-        fse.copy(s, d);
-      }
-    });
   }
 };

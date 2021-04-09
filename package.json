@@ -9,7 +9,6 @@
     "deps": "make -C ./pybind11/ && tools/install-python.js",
     "preinstall": "npm install @mapbox/node-pre-gyp",
     "install": "node-pre-gyp install --fallback-to-build=false || npm run build",
-    "postinstall": "node ./tools/recovery-lib.js",
     "pretest": "npm run lint && ./.miniconda/bin/pip install numpy==1.17.4",
     "test": "ava",
     "cov": "nyc --reporter=text-summary npm run test",
@@ -18,10 +17,10 @@
     "lint:js": "eslint . -c .eslintrc.js --no-eslintrc",
     "lint:clang": "./clang-format.py",
     "build": "npm run deps && npm run compile",
-    "pre-gyp": "node ./tools/pre-gyp.js && node-pre-gyp package",
+    "pre-gyp": "node-pre-gyp package",
     "codecov": "nyc report --reporter=lcovonly && codecov",
     "htmlcov": "nyc report --reporter=html",
-    "compile": "node-gyp configure && node-gyp build"
+    "compile": "node-pre-gyp rebuild"
   },
   "repository": {
     "type": "git",
@@ -48,7 +47,6 @@
     ]
   },
   "dependencies": {
-    "bindings": "^1.5.0",
     "debug": "^4.1.1",
     "node-addon-api": "^3.0.0"
   },
@@ -68,9 +66,11 @@
   },
   "binary": {
     "module_name": "boa",
-    "module_path": "./build/Release/",
+    "module_path": "./binding/v{napi_build_version}",
+    "package_name": "{module_name}-v{version}-{platform}-{arch}-napi-v{napi_build_version}.tar.gz",
     "host": "https://boa-binary.oss-cn-hangzhou.aliyuncs.com",
     "bucket": "boa-binary",
-    "region": "oss-cn-hangzhou"
+    "region": "oss-cn-hangzhou",
+    "napi_versions": [ 6 ]
   }
 }

@@ -1,22 +1,22 @@
 #!/usr/bin/env node
-
 'use strict';
 
 const utils = require('./utils');
 const fs = require('fs');
+const path = require('path');
 
 const run = utils.run.bind(utils);
 const py = utils.py.bind(utils);
-
-if (!utils.shouldInstallConda()) {
-  console.info('skip installing the python from conda.');
-  return process.exit(0);
-}
 
 // download and install conda
 const remoteURL = utils.getCondaRemote();
 const installDir = utils.resolveAndUpdateCondaPath();
 const downloader = utils.getCondaDownloaderName();
+
+if (!utils.shouldInstallConda()) {
+  console.info('skip installing the python from conda.');
+  return process.exit(0);
+}
 
 // fetch the downloader file if that doesn't exist.
 if (!fs.existsSync(downloader)) {

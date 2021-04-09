@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "boa",
+      "target_name": "<(module_name)",
       "sources": [
         "src/binding.cc",
         "src/core/node.cc",
@@ -35,7 +35,8 @@
       ],
       "defines": [
         "NAPI_CPP_EXCEPTIONS",
-        "BOA_LIBPYTHON_NAME=python<!@(node -p \"require('./tools/utils').getPythonVersion()\")"
+        "BOA_LIBPYTHON_NAME=python<!@(node -p \"require('./tools/utils').getPythonVersion()\")",
+        "NAPI_VERSION=6"
       ],
       "conditions": [
         ['OS=="mac"', {
@@ -46,5 +47,20 @@
         }],
       ],
     },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+        {
+          "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+          "destination": "<(module_path)"
+        },
+        {
+          "files": [ "<!@(node -p \"require('./tools/utils').getPythonLibraryAbsPath()\")" ],
+          "destination": "<(module_path)"
+        }
+      ]
+    }
   ]
 }

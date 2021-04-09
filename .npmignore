@@ -1,5 +1,8 @@
-build
+build*
+binding
+*.tgz
 coverage
+clang-format.py
 node_modules
 .nyc_output
 .dataset
@@ -13,3 +16,8 @@ node_modules
 .miniconda/
 Miniconda3-*.sh
 downloads
+tests
+pybind11/src
+logo.png
+.*
+tsconfig.json

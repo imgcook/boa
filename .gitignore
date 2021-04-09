@@ -1,10 +1,11 @@
-build
+build*
 coverage
 node_modules
 .nyc_output
 .dataset
 .data
 .checkpoints
+.history
 
 **/__pycache__
 *.heapsnapshot
@@ -15,3 +16,5 @@ node_modules
 Miniconda3-*.sh
 downloads
 pybind11/src
+*.tgz
+binding
