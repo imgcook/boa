@@ -16,6 +16,7 @@ if (major <= '12') {
   // See https://github.com/nodejs/node/pull/29796
   console.log(`1..0 # Skipped: Current nodejs version: ${
     process.version} does not support \`--experimental-loader\`.`);
+  test('ignore', t => t.pass());
   return;
 }
 

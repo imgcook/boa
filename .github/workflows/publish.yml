@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node_version: [ '12.11.0', '12.17.0', '12.19.0' ]
+        node_version: [ '12.17.0' ]
         os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Checkout Repo
@@ -30,16 +30,16 @@ jobs:
         run: |
           npm install
           npm run build
-          npx node-pre-gyp package 
-      # - name: Publish to npm
-      # - run: |
-      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" > ~/.npmrc
-      #     git config --global user.name 'WenheLI'
-      #     git config --global user.email 'lwh.eric@alibaba-inc.com'
-      #     npm run release
+          npm run pre-gyp
+      - name: Publish to npm
+      - run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          git config --global user.name ${{ secrets.NAME_USERNAME }}
+          git config --global user.email ${{ secrets.NPM_EMAIL }}
+          npm run release
       - name: boa binary artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist-without-markdown
+          name: dist-tarball-${{ matrix.node_version }}-${{ matrix.os }}
           path: |
-            build
+            build/stage/*.tar.gz

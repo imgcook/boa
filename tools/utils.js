@@ -1,9 +1,9 @@
 'use strict';
 
 const os = require('os');
-const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const fs = require('fs');
 
 // Constants
 const CONDA_INSTALL_DIR = path.join(__dirname, '../.CONDA_INSTALL_DIR');
@@ -182,9 +182,9 @@ module.exports = {
    * Get the runpath/rpath of the python library, this is used to load dynamically.
    */
   getPythonLibraryRunPath() {
-    if (BOA_CONDA_PREFIX === '@packages') {
-      const prefix = PLATFORM === 'darwin' ? '@loader_path' : '$$ORIGIN';
-      return `${prefix}/../../${CONDA_INSTALL_NAME}/lib`;
+    if (BOA_CONDA_PREFIX === '@package') {
+      const prefix = this.PLATFORM === 'darwin' ? '@loader_path' : '$$ORIGIN';
+      return `${prefix}/lib`;
     } else {
       return this.getPythonLibraryAbsPath();
     }
