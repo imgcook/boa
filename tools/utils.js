@@ -8,7 +8,6 @@ const fs = require('fs');
 // Constants
 const CONDA_INSTALL_DIR = path.join(__dirname, '../.CONDA_INSTALL_DIR');
 const CONDA_INSTALL_NAME = '.miniconda';
-const CONDA_DIRS = [ 'lib', 'bin', 'include' ];
 
 // Environment variables
 let {
@@ -267,5 +266,5 @@ module.exports = {
     }
     cmds.push('--timeout=5');
     return this.py(...cmds);
-  }
+  },
 };
