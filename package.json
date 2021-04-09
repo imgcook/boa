@@ -56,7 +56,6 @@
     "ava": "^3.13.0",
     "codecov": "^3.6.5",
     "eslint": "^7.15.0",
-    "fs-extra": "^9.1.0",
     "nyc": "^15.1.0",
     "ts-node": "^8.6.2",
     "typescript": "^4.2.3"
@@ -71,6 +70,8 @@
     "host": "https://boa-binary.oss-cn-hangzhou.aliyuncs.com",
     "bucket": "boa-binary",
     "region": "oss-cn-hangzhou",
-    "napi_versions": [ 6 ]
+    "napi_versions": [
+      6
+    ]
   }
 }
