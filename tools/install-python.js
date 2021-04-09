@@ -3,7 +3,6 @@
 
 const utils = require('./utils');
 const fs = require('fs');
-const path = require('path');
 
 const run = utils.run.bind(utils);
 const py = utils.py.bind(utils);
