@@ -7,15 +7,15 @@ const fs = require('fs');
 const run = utils.run.bind(utils);
 const py = utils.py.bind(utils);
 
-// download and install conda
-const remoteURL = utils.getCondaRemote();
-const installDir = utils.resolveAndUpdateCondaPath();
-const downloader = utils.getCondaDownloaderName();
-
 if (!utils.shouldInstallConda()) {
   console.info('skip installing the python from conda.');
   return process.exit(0);
 }
+
+// download and install conda
+const remoteURL = utils.getCondaRemote();
+const installDir = utils.resolveAndUpdateCondaPath();
+const downloader = utils.getCondaDownloaderName();
 
 // fetch the downloader file if that doesn't exist.
 if (!fs.existsSync(downloader)) {
