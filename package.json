@@ -47,11 +47,11 @@
     ]
   },
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.3",
     "debug": "^4.1.1",
     "node-addon-api": "^3.0.0"
   },
   "devDependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.3",
     "@types/node": "^14.14.37",
     "ava": "^3.13.0",
     "codecov": "^3.6.5",
