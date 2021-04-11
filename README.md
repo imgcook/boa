@@ -1,8 +1,19 @@
+<p align="center">
+  <a href="https://alibaba.github.io/pipcook/">
+    <img alt="boa" src="./logo.png" width="160">
+  </a>
+</p>
+
 # Introduction to Boa
 
 Boa is the Python Bridge Layer in Pipcook, it lets you call Python functions seamlessly in Node.js, it delivers any Python module for Node.js developer in lower-cost to learn or use.
 
 ## Quick Start
+
+Install from npm:
+```shell
+$ npm install @pipcook/boa
+```
 
 Let's have a glance on how to call to Python's function:
 
@@ -425,3 +436,13 @@ If you are using virtualenv or conda, you can just set up your system environmen
 ```sh
 $ export PYTHONPATH = /Users/venv/lib/python3.7/site-packages
 ```
+
+## License
+
+[Apache 2.0](./LICENSE)
+
+[TypeScript]: https://github.com/microsoft/TypeScript
+[Node.js]: https://nodejs.org/
+[npm]: https://npmjs.com/
+[Python]: https://www.python.org/
+[CPython]: https://github.com/python/cpython
