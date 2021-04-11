@@ -10,7 +10,7 @@ Boa is the Python Bridge Layer in Pipcook, it lets you call Python functions sea
 
 ## Quick Start
 
-Install from npm:
+Install Boa from npm:
 ```shell
 $ npm install @pipcook/boa
 ```
