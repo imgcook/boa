@@ -172,6 +172,13 @@ module.exports = {
   },
 
   /**
+   * Get the absolute path of the python bin, this is use to compile with.
+   */
+  getPythonBinaryAbsPath() {
+    return path.join(this.getCondaPath(), 'bin');
+  },
+
+  /**
    * Get the absolute path of the python library, this is used to compile with.
    */
   getPythonLibraryAbsPath() {

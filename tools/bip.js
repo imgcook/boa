@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const { run, getCondaPath } = require('./utils');
+const path = require('path');
+const { run } = require('./utils');
 
 const args = process.argv.slice(2).join(' ');
-const condaPath = getCondaPath();
-if (!fs.existsSync(condaPath)) {
-  throw new TypeError('conda env is not initialized.');
+const bindingPath = path.resolve(__dirname, '../binding/v6');
+
+if (!fs.existsSync(bindingPath)) {
+  throw new TypeError('Binding should be built first.');
 }
 
-run(`${condaPath}/bin/pip`, args);
+run(`${bindingPath}/bin/python ${bindingPath}/bin/pip`, args);

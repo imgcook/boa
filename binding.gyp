@@ -53,11 +53,9 @@
       "dependencies": [ "<(module_name)" ],
       "copies": [
         {
-          "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
-          "destination": "<(module_path)"
-        },
-        {
-          "files": [ "<!@(node -p \"require('./tools/utils').getPythonLibraryAbsPath()\")" ],
+          "files": [ "<(PRODUCT_DIR)/<(module_name).node", 
+                     "<!@(node -p \"require('./tools/utils').getPythonLibraryAbsPath()\")", 
+                     "<!@(node -p \"require('./tools/utils').getPythonBinaryAbsPath()\")" ],
           "destination": "<(module_path)"
         }
       ]
