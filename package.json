@@ -63,6 +63,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "bin": {
+    "bip": "./tools/bip.js"
+  },
   "binary": {
     "module_name": "boa",
     "module_path": "./binding/v{napi_build_version}",
