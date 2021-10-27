@@ -166,10 +166,16 @@ Napi::Value PythonObject::Invoke(const CallbackInfo &info) {
   // Invoke this function
   try {
     PyObject *result = PyObject_Call(_self.ptr(), args_, kwargs);
+    Py_DECREF(args_);
+    if (kwargs) {
+      Py_DECREF(kwargs);
+    }
     if (!result)
       throw pybind::error_already_set();
-    return PythonObject::NewInstance(
+    Napi::Value res = PythonObject::NewInstance(
         info.Env(), pybind::reinterpret_borrow<pybind::object>(result));
+    Py_DECREF(result);
+    return res;
   } catch (pybind::error_already_set &e) {
     if (e.matches(pybind::handle(PyExc_SystemExit))) {
       // FIXME(Yorkie): ignore the SystemExit error.
