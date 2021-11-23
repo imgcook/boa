@@ -9,7 +9,7 @@
     "deps": "make -C ./pybind11/ && tools/install-python.js",
     "preinstall": "npm install @mapbox/node-pre-gyp",
     "install": "node-pre-gyp install --fallback-to-build=false || npm run build",
-    "pretest": "npm run lint && ./.miniconda/bin/pip install numpy==1.17.4",
+    "pretest": "npm run lint && ./tools/bip.js install numpy==1.17.4",
     "test": "ava",
     "cov": "nyc --reporter=text-summary npm run test",
     "cov:report": "nyc report -r=lcov",
