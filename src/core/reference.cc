@@ -7,9 +7,7 @@ PythonReference::PythonReference(PythonObject *scope) : mScope(scope) {
 }
 
 PythonReference::~PythonReference() {
-  if (isRef) {
-    mScope->Unref();
-  }
+
 }
 
 template <typename T> T *PythonReference::Unwrap(PyObject *wrapped) {
