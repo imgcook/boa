@@ -47,7 +47,6 @@ if (isMainThread) {
         console.log('train task is completed');
         setTimeout(() => {
           clearInterval(alive);
-          console.log(foo.ping('x'));
           t.end();
         }, 1000);
       }
