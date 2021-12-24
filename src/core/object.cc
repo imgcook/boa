@@ -174,7 +174,6 @@ Napi::Value PythonObject::Invoke(const CallbackInfo &info) {
       throw pybind::error_already_set();
     Napi::Value res = PythonObject::NewInstance(
         info.Env(), pybind::reinterpret_borrow<pybind::object>(result));
-    Py_DECREF(result);
     return res;
   } catch (pybind::error_already_set &e) {
     if (e.matches(pybind::handle(PyExc_SystemExit))) {
