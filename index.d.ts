@@ -84,7 +84,7 @@ declare interface PyBuiltins extends PyObject {
  * This is a wrapper for shared Python object, just like
  * v8's `SharedArrayBuffer`.
  */
-declare class SharedObject {
+declare class SharedPythonObject {
   constructor(o: PyObject);
 }
 
@@ -136,7 +136,7 @@ interface BoaInterface {
     PyGetItemSymbol: typeof PyGetItemSymbol;
     PySetItemSymbol: typeof PySetItemSymbol;
   };
-  SharedObject: typeof SharedObject;
+  SharedPythonObject: typeof SharedPythonObject;
 }
 
 declare const api: BoaInterface;
