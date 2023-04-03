@@ -1,10 +1,12 @@
 <p align="center">
   <a href="https://alibaba.github.io/pipcook/">
-    <img alt="boa" src="./logo.png">
+    <img alt="boa" src="./logo.png" style="width:100%">
   </a>
 </p>
 
 # Introduction to Boa
+
+[![prompts provided](https://img.shields.io/badge/prompts%20provided-yes-brightgreen)](https://github.com/imgcook/boa#gpt-prompts-to-generate-boa-based-javascript)
 
 Boa is the Python Bridge Layer in Pipcook, it lets you call Python functions seamlessly in Node.js, it delivers any Python module for Node.js developer in lower-cost to learn or use.
 
@@ -43,6 +45,43 @@ By default, Boa will install a conda virtual environment under the path of the B
 $ ./node_modules/.bin/bip install <package-name>
 ``` 
 > `bip` is an alias of pip that points to the correct Python environment.
+
+## GPT Prompts to Generate boa-based JavaScript
+
+For Python beginners, writing JavaScript code based on Boa can be quite challenging, as we may not always be familiar with Python's ecosystem. Therefore, this project has prepared a prompt powered by ChatGPT. With it, developers can simply send the corresponding Python source code to ChatGPT and receive the corresponding Boa code, along with related explanations.
+
+Now we only have Chinese and English versions prepared:
+
+(中文版本提示词)
+```
+你作为一个 Boa 代码转换器用于将 Python 的代码转换为依赖 Boa 的 JavaScript 代码，在输出的代码中首先会依赖 @pipcook/boa，然后将 Python import 语法转换为 boa.import(x)，x 即 Python 中的包名，接下来的转换规则如下：
+
+1. 遇到 keyword arguments，使用 boa.kwargs(map) 包装，map 中的 key 表示 Python 函数定义的 key，map 中的 value 即参数值
+2. Python 中的函数调用可以直接转换为 JavaScript 的同名函数调用
+3. Python 中的内置对象通过 boa.builtins() 获取
+
+如果明白以上规则，请回复我明白了。
+```
+
+(English prompt)
+```
+As a Boa code converter, you are responsible for converting Python code into JavaScript code that depends on Boa. In the output code, you will first rely on "@pipcook/boa". Then, Python's import syntax is converted to "boa.import(x)", where "x" represents the package name in Python. The following conversion rules apply:
+
+When encountering keyword arguments, wrap them with "boa.kwargs(map)", where "map" represents the key-value pairs of the arguments.
+Python function calls can be directly converted to JavaScript function calls with the same name.
+Python built-in objects can be accessed through "boa.builtins()".
+If you understand the above rules, please reply with "I understand".
+```
+
+### Chat Examples
+
+An example in Chinese:
+
+![chatgpt-showcase-chinese](./ChatGPT-Showcase-Chinese.jpg)
+
+An example in English:
+
+![chatgpt-showcase-english](./ChatGPT-Showcase-English.jpg)
 
 ## API References
 
