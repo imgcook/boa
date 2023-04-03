@@ -77,11 +77,11 @@ If you understand the above rules, please reply with "I understand".
 
 An example in Chinese:
 
-![chatgpt-showcase-chinese][./ChatGPT-Showcase-Chinese.jpg]
+![chatgpt-showcase-chinese](./ChatGPT-Showcase-Chinese.jpg)
 
 An example in English:
 
-![chatgpt-showcase-english][./ChatGPT-Showcase-English.jpg]
+![chatgpt-showcase-english](./ChatGPT-Showcase-English.jpg)
 
 ## API References
 
