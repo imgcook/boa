@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://alibaba.github.io/pipcook/">
-    <img alt="boa" src="./logo.png">
+    <img alt="boa" src="./logo.png" style="width:100%">
   </a>
 </p>
 
